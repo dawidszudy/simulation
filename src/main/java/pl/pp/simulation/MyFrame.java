@@ -1,10 +1,15 @@
 package pl.pp.simulation;
 
+import pl.pp.simulation.model.Grass;
+import pl.pp.simulation.model.Hare;
+import pl.pp.simulation.utils.ParameterModel;
+import pl.pp.simulation.utils.ProgramData;
+
 import javax.swing.*;
 import java.awt.*;
 
-import static pl.pp.simulation.Components.*;
-import static pl.pp.simulation.ProgramData.*;
+import static pl.pp.simulation.utils.Components.*;
+import static pl.pp.simulation.utils.ProgramData.*;
 
 public class MyFrame extends JFrame {
 
@@ -52,6 +57,10 @@ public class MyFrame extends JFrame {
 
         JButton chartButton = new JButton("Wykres");
 
+        chartButton.addActionListener(e -> {
+            simulationChart.setVisible(true);
+        });
+
         controlPanel.add(timeLabel);
         controlPanel.add(grassParameter.getPanel());
         controlPanel.add(hareParameter.getPanel());
@@ -82,7 +91,8 @@ public class MyFrame extends JFrame {
             foxParameter.setEditable(true);
 
             steps = 0;
-            timeLabel.setText("Czas: 0");
+            simulationChart.clearSeries();  //serowanie serii do wykresu
+            timeLabel.setText("Czas: " + steps);
 
         });
     }
