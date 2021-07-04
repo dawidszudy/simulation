@@ -78,6 +78,8 @@ public class MyFrame extends JFrame {
             running = false;
             started = false;
 
+            textArea.setText("");
+
             timer.stop();
 
             grassList.clear();
@@ -91,7 +93,7 @@ public class MyFrame extends JFrame {
             foxParameter.setEditable(true);
 
             steps = 0;
-            simulationChart.clearSeries();  //serowanie serii do wykresu
+            simulationChart.clearSeries();
             timeLabel.setText("Czas: " + steps);
 
         });

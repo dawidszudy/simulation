@@ -2,7 +2,6 @@ package pl.pp.simulation.utils;
 
 import pl.pp.simulation.MyComponent;
 import pl.pp.simulation.SimulationChart;
-import pl.pp.simulation.utils.ParameterModel;
 
 import javax.swing.*;
 
