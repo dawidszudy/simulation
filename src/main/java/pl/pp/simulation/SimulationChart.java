@@ -8,10 +8,13 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 
+import static pl.pp.simulation.utils.Components.simulationChart;
+
 public class SimulationChart extends JFrame {
 
     private XYSeries hareSeries;
     private XYSeries grassSeries;
+    private XYSeries foxSeries;
 
     public SimulationChart() {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -38,11 +41,13 @@ public class SimulationChart extends JFrame {
 
     private XYSeriesCollection getDataSet() {
         XYSeriesCollection dataset = new XYSeriesCollection();
-        hareSeries = new XYSeries("zające");
         grassSeries = new XYSeries("trawa");
+        hareSeries = new XYSeries("zające");
+        foxSeries = new XYSeries("lisy");
 
         dataset.addSeries(hareSeries);
         dataset.addSeries(grassSeries);
+        dataset.addSeries(foxSeries);
         return dataset;
     }
 
@@ -54,8 +59,14 @@ public class SimulationChart extends JFrame {
         return grassSeries;
     }
 
+    public XYSeries getFoxSeries() {
+        return foxSeries;
+    }
+
     public void clearSeries() {
         hareSeries.clear();
         grassSeries.clear();
+        foxSeries.clear();
     }
+
 }

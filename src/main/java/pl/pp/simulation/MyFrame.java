@@ -1,5 +1,6 @@
 package pl.pp.simulation;
 
+import pl.pp.simulation.model.Fox;
 import pl.pp.simulation.model.Grass;
 import pl.pp.simulation.model.Hare;
 import pl.pp.simulation.utils.ParameterModel;
@@ -45,11 +46,11 @@ public class MyFrame extends JFrame {
 
         controlPanel.setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));
 
-        timeLabel = new JLabel("Czas: 0");
+        timeLabel = new JLabel("Czas: " + steps);
 
-        grassParameter = new ParameterModel("Trawa", 10);
-        hareParameter = new ParameterModel("Zające", 5);
-        foxParameter = new ParameterModel("Lisy", 2);
+        grassParameter = new ParameterModel("Trawa", 50);
+        hareParameter = new ParameterModel("Zające", 20);
+        foxParameter = new ParameterModel("Lisy", 12);
 
         initStartButton();
         initStopButton();
@@ -84,6 +85,7 @@ public class MyFrame extends JFrame {
 
             grassList.clear();
             hareList.clear();
+            foxList.clear();
 
             stopButton.setEnabled(false);
             startButton.setEnabled(true);
@@ -92,8 +94,8 @@ public class MyFrame extends JFrame {
             hareParameter.setEditable(true);
             foxParameter.setEditable(true);
 
-            steps = 0;
             simulationChart.clearSeries();
+
             timeLabel.setText("Czas: " + steps);
 
         });
@@ -121,6 +123,10 @@ public class MyFrame extends JFrame {
 
                 for (int i = 0; i< grassParameter.getValue(); i++) {
                     grassList.add(new Grass());
+                }
+
+                for (int i = 0; i< foxParameter.getValue(); i++) {
+                    foxList.add(new Fox());
                 }
             }
             running = true;
