@@ -7,10 +7,11 @@ import java.awt.geom.Ellipse2D;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static pl.pp.simulation.utils.Components.textArea;
-import static pl.pp.simulation.utils.ProgramData.deathHareList;
-import static pl.pp.simulation.utils.ProgramData.grassList;
-import static pl.pp.simulation.utils.Utils.*;
+import static pl.pp.simulation.model.GrassUtils.grassList;
+import static pl.pp.simulation.model.Hares.deathHareList;
+import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
+import static pl.pp.simulation.utils.Utils.getDistance;
+import static pl.pp.simulation.utils.Utils.multipleHares;
 
 public class Hare extends Animal {
 
@@ -33,7 +34,7 @@ public class Hare extends Animal {
     public void move() {
         super.move();
 
-        if (hunger > deathlyHunger) {
+        if ( hunger > deathlyHunger ) {
             deathHareList.add(this);
         }
     }
@@ -46,14 +47,14 @@ public class Hare extends Animal {
 
 
     public void changeSpeed() {
-        if (getVisibleFoxes().size() > 0){
+        if ( getVisibleFoxes().size() > 0 ) {
             Fox nearestFox = Collections.min(getVisibleFoxes(), Comparator.comparingDouble((Fox f) -> getDistance(this, f)));
             runAwayFrom(nearestFox);
-        } else if (hunger >= minimumHunger && getVisibleGrass().size() > 0) {
+        } else if ( hunger >= minimumHunger && getVisibleGrass().size() > 0 ) {
             Grass nearestGrass = Collections.min(getVisibleGrass(), Comparator.comparingDouble((Grass hare) -> getDistance(this, hare)));
             adjustSpeedTo(nearestGrass);
             eatIfContact(nearestGrass);
-        } else if (desireForParenthood >= minimumDesireForParenthood && getVisibleHares().size() > 0 && hunger < minimumHunger * 2) {
+        } else if ( desireForParenthood >= minimumDesireForParenthood && getVisibleHares().size() > 0 && hunger < minimumHunger * 2 ) {
             Hare nearestHare = Collections.min(getVisibleHares(), Comparator.comparingDouble((Hare hare) -> getDistance(this, hare)));
             adjustSpeedTo(nearestHare);
             multipleIfContact(nearestHare);
@@ -66,7 +67,7 @@ public class Hare extends Animal {
     private void multipleIfContact(Hare nearestHare) {
         double distance = Utils.getDistance(nearestHare, this);
 
-        if (distance < size) {
+        if ( distance < size ) {
             multipleHares(this, nearestHare);
         }
     }
@@ -74,7 +75,7 @@ public class Hare extends Animal {
     private void eatIfContact(Grass nearestGrass) {
         double distance = Utils.getDistance(nearestGrass, this);
 
-        if (distance < size) {
+        if ( distance < size ) {
             eatGrass(nearestGrass);
         }
     }

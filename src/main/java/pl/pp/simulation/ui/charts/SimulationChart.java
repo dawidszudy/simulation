@@ -1,4 +1,4 @@
-package pl.pp.simulation;
+package pl.pp.simulation.ui.charts;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -8,10 +8,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 
-import static pl.pp.simulation.utils.Components.simulationChart;
-
 public class SimulationChart extends JFrame {
 
+    public static SimulationChart simulationChart = new SimulationChart();
     private XYSeries hareSeries;
     private XYSeries grassSeries;
     private XYSeries foxSeries;
@@ -30,19 +29,18 @@ public class SimulationChart extends JFrame {
     }
 
     private JFreeChart getChart(XYSeriesCollection dataset) {
-        JFreeChart freeChart = ChartFactory.createXYLineChart(
+        return ChartFactory.createXYLineChart(
                 "Ilość organizmów w zależeności od czasu",
                 "czas",
                 "ilosć",
                 dataset
         );
-        return freeChart;
     }
 
     private XYSeriesCollection getDataSet() {
         XYSeriesCollection dataset = new XYSeriesCollection();
-        grassSeries = new XYSeries("trawa");
         hareSeries = new XYSeries("zające");
+        grassSeries = new XYSeries("trawa");
         foxSeries = new XYSeries("lisy");
 
         dataset.addSeries(hareSeries);
@@ -64,9 +62,9 @@ public class SimulationChart extends JFrame {
     }
 
     public void clearSeries() {
-        hareSeries.clear();
         grassSeries.clear();
+        hareSeries.clear();
         foxSeries.clear();
-    }
 
+    }
 }
