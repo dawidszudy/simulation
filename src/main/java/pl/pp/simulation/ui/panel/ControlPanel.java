@@ -11,19 +11,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ControlPanel extends JPanel {
+    
     public static ParameterModel grassParameter;
     public static ParameterModel hareParameter;
     public static ParameterModel foxParameter;
 
     public static JLabel timeLabel;
 
-    private static final ControlPanel controlPanel = new ControlPanel();
+    //usunięcie przekazanie instancji bo niepotrzebne już
+//    private static final ControlPanel controlPanel = new ControlPanel();
+//
+//    public static ControlPanel getInstance() {
+//        return controlPanel;
+//    }
 
-    public static ControlPanel getInstance() {
-        return controlPanel;
-    }
-
-    private ControlPanel() {
+    //zmiana na public bo potrzebne w SimulationConfig
+    public ControlPanel() {
+        System.out.println("konstruktor - ControlPanel");
         setLayout(new GridLayout(8, 1, 50, 50));
 
         setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));

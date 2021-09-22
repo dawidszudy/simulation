@@ -12,12 +12,18 @@
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
         <jfreechart.version>1.5.3</jfreechart.version>
+        <spring-context.version>5.3.9</spring-context.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
             <version>${jfreechart.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-context.version}</version>
         </dependency>
     </dependencies>
 
