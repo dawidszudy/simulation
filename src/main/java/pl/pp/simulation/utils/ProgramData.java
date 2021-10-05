@@ -1,5 +1,10 @@
 package pl.pp.simulation.utils;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import pl.pp.simulation.Step;
+import pl.pp.simulation.config.SimulationConfig;
+
 import javax.swing.*;
 
 public class ProgramData {
@@ -12,7 +17,9 @@ public class ProgramData {
     public static boolean started = false;
     public static boolean running = false;
 
-    public static Timer timer;
+    //uzyskiwany przez context.getBean a następnie wstrzykiwany przez Springa
+    //public static Step timer;
+    public static ApplicationContext context = new AnnotationConfigApplicationContext(SimulationConfig.class);
     public static long steps = 0;
 
 }

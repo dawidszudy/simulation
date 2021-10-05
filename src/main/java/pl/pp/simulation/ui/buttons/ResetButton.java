@@ -1,8 +1,10 @@
 package pl.pp.simulation.ui.buttons;
 
+import pl.pp.simulation.Step;
 import pl.pp.simulation.model.Foxes;
 import pl.pp.simulation.model.GrassUtils;
 import pl.pp.simulation.model.Hares;
+import pl.pp.simulation.ui.MyFrame;
 import pl.pp.simulation.ui.panel.ControlPanel;
 
 import javax.swing.*;
@@ -13,14 +15,16 @@ import static pl.pp.simulation.utils.ProgramData.*;
 
 public class ResetButton extends JButton {
 
-    private static final ResetButton RESET_BUTTON = new ResetButton("Reset");
+    //usunięcie przekazanie instancji bo niepotrzebne już - tworzenie przez Bean
+//    private static final ResetButton RESET_BUTTON = new ResetButton("Reset");
+//
+//    public static ResetButton getInstance() {
+//        return RESET_BUTTON;
+//    }
 
-    public static ResetButton getInstance() {
-        return RESET_BUTTON;
-    }
-
-    private ResetButton(String text) {
+    public ResetButton(StopButton stopButton, StartButton startButton, Step timer, String text) {
         super(text);
+        System.out.println("konstruktor - Reset Button ");
 
         addActionListener(e -> {
             running = false;
@@ -30,12 +34,14 @@ public class ResetButton extends JButton {
 
             simulationChart.clearSeries();
 
+            //context usunięty bo wstrzykujemy w bean
+            //Step timer = context.getBean("timer", Step.class);
             timer.stop();
 
             clear();
 
-            StopButton.getInstance().setEnabled(false);
-            StartButton.getInstance().setEnabled(true);
+            stopButton.setEnabled(false);
+            startButton.setEnabled(true);
 
             ControlPanel.setEditableParameters();
 

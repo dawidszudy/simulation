@@ -1,5 +1,6 @@
 package pl.pp.simulation.ui.buttons;
 
+import pl.pp.simulation.Step;
 import pl.pp.simulation.model.*;
 import pl.pp.simulation.ui.panel.ControlPanel;
 import pl.pp.simulation.utils.ParameterModel;
@@ -14,14 +15,16 @@ public class StartButton extends JButton {
     public ParameterModel hareParameter = ControlPanel.hareParameter;
     public ParameterModel foxParameter = ControlPanel.foxParameter;
 
-    private static final StartButton START_BUTTON = new StartButton("Start");
+    //usunięcie przekazanie instancji bo niepotrzebne już - tworzenie przez Bean
+//    private static final StartButton START_BUTTON = new StartButton("Start");
+//
+//    public static StartButton getInstance() {
+//        return START_BUTTON;
+//    }
 
-    public static StartButton getInstance() {
-        return START_BUTTON;
-    }
-
-    private StartButton(String text) {
+    public StartButton(StopButton stopButton, Step timer, String text) {
         super(text);
+        System.out.println("konstruktor - Start Button ");
 
         addActionListener(e -> {
 
@@ -31,11 +34,13 @@ public class StartButton extends JButton {
             running = true;
             started = true;
 
-            StopButton.getInstance().setEnabled(true);
+            stopButton.setEnabled(true);
             setEnabled(false);
 
             ControlPanel.setNotEditableParameters();
 
+            //context usunięty bo wstrzykujemy w bean
+            //Step timer = context.getBean("timer", Step.class);
             timer.start();
         });
     }

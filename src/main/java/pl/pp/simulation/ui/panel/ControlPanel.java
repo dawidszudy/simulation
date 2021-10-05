@@ -12,21 +12,21 @@ import java.awt.*;
 
 public class ControlPanel extends JPanel {
     
-    public static ParameterModel grassParameter;
-    public static ParameterModel hareParameter;
-    public static ParameterModel foxParameter;
+    public static ParameterModel grassParameter = new ParameterModel("Trawa", 100);
+    public static ParameterModel hareParameter = new ParameterModel("Zające", 20);
+    public static ParameterModel foxParameter = new ParameterModel("Lisy", 10);
 
     public static JLabel timeLabel;
 
-    //usunięcie przekazanie instancji bo niepotrzebne już
+    //usunięcie przekazanie instancji bo niepotrzebne już - tworzenie przez Bean
 //    private static final ControlPanel controlPanel = new ControlPanel();
 //
 //    public static ControlPanel getInstance() {
 //        return controlPanel;
 //    }
 
-    //zmiana na public bo potrzebne w SimulationConfig
-    public ControlPanel() {
+    //zmiana na public bo potrzebne w SimulationConfig Do Bean-a
+    public ControlPanel(StopButton stopButton, StartButton startButton, ResetButton resetButton) {
         System.out.println("konstruktor - ControlPanel");
         setLayout(new GridLayout(8, 1, 50, 50));
 
@@ -34,17 +34,18 @@ public class ControlPanel extends JPanel {
 
         timeLabel = new JLabel("Czas: 0");
 
-        grassParameter = new ParameterModel("Trawa", 100);
-        hareParameter = new ParameterModel("Zające", 20);
-        foxParameter = new ParameterModel("Lisy", 10);
+        //przeniesione do pól bo control panel jest zarządzany przez springa
+//        grassParameter = new ParameterModel("Trawa", 100);
+//        hareParameter = new ParameterModel("Zające", 20);
+//        foxParameter = new ParameterModel("Lisy", 10);
 
         add(timeLabel);
         add(grassParameter.getPanel());
         add(hareParameter.getPanel());
         add(foxParameter.getPanel());
-        add(StartButton.getInstance());
-        add(StopButton.getInstance());
-        add(ResetButton.getInstance());
+        add(startButton);
+        add(stopButton);
+        add(resetButton);
         add(ChartButton.getInstance());
     }
 
