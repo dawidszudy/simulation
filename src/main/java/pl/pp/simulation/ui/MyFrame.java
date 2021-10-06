@@ -7,6 +7,7 @@ import pl.pp.simulation.ui.panel.ControlPanel;
 import pl.pp.simulation.ui.panel.ScrollPanel;
 import pl.pp.simulation.utils.ProgramData;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,11 +17,13 @@ public class MyFrame extends JFrame {
     private ScrollPanel scrollPanel;
     private SimulationComponent simulationComponent;
 
-    public MyFrame(ControlPanel controlPanel, ScrollPanel scrollPanel, SimulationComponent simulationComponent) throws HeadlessException {
-        this.controlPanel = controlPanel;
-        this.scrollPanel = scrollPanel;
-        this.simulationComponent = simulationComponent;
+    public MyFrame() throws HeadlessException {
 
+    }
+
+    //@PostConstruct - adnotacja do wywołania metody po konstruktorze
+    @PostConstruct
+    private void init() {
         //przekopiowane z konstruktora bezargumentowego
         setTitle("Sumulacja drapieżnik - ofiara");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,14 +35,16 @@ public class MyFrame extends JFrame {
         add(scrollPanel, BorderLayout.SOUTH);
     }
 
-    //niepotrzebne żeby nie dublować contextu który powoduje wywołanie 2x konstruktorów
-//    public MyFrame() {
-//        //stworzenie contextu i pobranie bean
-//        ApplicationContext context = new AnnotationConfigApplicationContext(SimulationConfig.class);
-//        ControlPanel controlPanel = context.getBean("controlPanel", ControlPanel.class);
-//        ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
-//        SimulationComponent simulationComponent = context.getBean("simulationComponent", SimulationComponent.class);
-//
-//    }
+    public void setControlPanel(ControlPanel controlPanel) {
+        this.controlPanel = controlPanel;
+    }
+
+    public void setScrollPanel(ScrollPanel scrollPanel) {
+        this.scrollPanel = scrollPanel;
+    }
+
+    public void setSimulationComponent(SimulationComponent simulationComponent) {
+        this.simulationComponent = simulationComponent;
+    }
 
 }

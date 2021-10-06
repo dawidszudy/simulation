@@ -15,19 +15,28 @@ import pl.pp.simulation.ui.panel.ScrollPanel;
 public class SimulationConfig {
 
     @Bean
-    public StopButton stopButton() {
-        //return new StopButton(startButton(), "Stop");
-        return new StopButton(timer(), "Stop");
+    public StartButton startButton() {
+        StartButton startButton = new StartButton("Start");
+        startButton.setStopButton(stopButton());
+        startButton.setTimer(timer());
+        return startButton;
     }
 
     @Bean
-    public StartButton startButton() {
-        return new StartButton(stopButton(), timer(), "Start");
+    public StopButton stopButton() {
+        StopButton stopButton = new StopButton("Stop");
+        stopButton.setTimer(timer());
+        return stopButton;
     }
 
+    //ustawianie poprzez settery
     @Bean
     public ResetButton resetButton() {
-        return new ResetButton(stopButton(), startButton(), timer(), "Reset");
+        ResetButton resetButton = new ResetButton("Reset");
+        resetButton.setStartButton(startButton());
+        resetButton.setStopButton(stopButton());
+        resetButton.setTimer(timer());
+        return resetButton;
     }
 
     @Bean
@@ -37,7 +46,11 @@ public class SimulationConfig {
 
     @Bean
     public ControlPanel controlPanel() {
-        return new ControlPanel(stopButton(), startButton(), resetButton());
+        ControlPanel controlPanel = new ControlPanel();
+        controlPanel.setResetButton(resetButton());
+        controlPanel.setStartButton(startButton());
+        controlPanel.setStopButton(stopButton());
+        return controlPanel;
     }
 
     @Bean
@@ -52,6 +65,10 @@ public class SimulationConfig {
 
     @Bean
     public MyFrame myFrame() {
-        return new MyFrame(controlPanel(), scrollPanel(), simulationComponent());
+        MyFrame myFrame = new MyFrame();
+        myFrame.setSimulationComponent(simulationComponent());
+        myFrame.setControlPanel(controlPanel());
+        myFrame.setScrollPanel(scrollPanel());
+        return myFrame;
     }
 }

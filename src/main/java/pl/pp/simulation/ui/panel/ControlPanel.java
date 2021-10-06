@@ -7,6 +7,7 @@ import pl.pp.simulation.ui.buttons.StopButton;
 import pl.pp.simulation.utils.ParameterModel;
 import pl.pp.simulation.utils.ProgramData;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,26 +19,21 @@ public class ControlPanel extends JPanel {
 
     public static JLabel timeLabel;
 
-    //usunięcie przekazanie instancji bo niepotrzebne już - tworzenie przez Bean
-//    private static final ControlPanel controlPanel = new ControlPanel();
-//
-//    public static ControlPanel getInstance() {
-//        return controlPanel;
-//    }
+    private StopButton stopButton;
+    private StartButton startButton;
+    private ResetButton resetButton;
 
-    //zmiana na public bo potrzebne w SimulationConfig Do Bean-a
-    public ControlPanel(StopButton stopButton, StartButton startButton, ResetButton resetButton) {
+    public ControlPanel() {
         System.out.println("konstruktor - ControlPanel");
+    }
+
+    @PostConstruct
+    private void init() {
         setLayout(new GridLayout(8, 1, 50, 50));
 
         setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));
 
         timeLabel = new JLabel("Czas: 0");
-
-        //przeniesione do pól bo control panel jest zarządzany przez springa
-//        grassParameter = new ParameterModel("Trawa", 100);
-//        hareParameter = new ParameterModel("Zające", 20);
-//        foxParameter = new ParameterModel("Lisy", 10);
 
         add(timeLabel);
         add(grassParameter.getPanel());
@@ -59,6 +55,18 @@ public class ControlPanel extends JPanel {
         grassParameter.setEditable(false);
         hareParameter.setEditable(false);
         foxParameter.setEditable(false);
+    }
+
+    public void setStopButton(StopButton stopButton) {
+        this.stopButton = stopButton;
+    }
+
+    public void setStartButton(StartButton startButton) {
+        this.startButton = startButton;
+    }
+
+    public void setResetButton(ResetButton resetButton) {
+        this.resetButton = resetButton;
     }
 
 }
