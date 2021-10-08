@@ -1,14 +1,12 @@
 package pl.pp.simulation.utils;
 
-import pl.pp.simulation.model.Fox;
-import pl.pp.simulation.model.Hare;
-import pl.pp.simulation.model.Organism;
+import pl.pp.simulation.model.*;
 
-import static pl.pp.simulation.model.Foxes.newFoxList;
-import static pl.pp.simulation.model.Hares.newHareList;
 import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
+import static pl.pp.simulation.utils.ProgramData.context;
 
 public class Utils {
+
     public static double getDistance(Organism organism1, Organism organism2) {
         double deltaX = organism1.getX() - organism2.getX();
         double deltaY = organism1.getY() - organism2.getY();
@@ -20,7 +18,8 @@ public class Utils {
         hare1.clearDesireForParenthood();
         hare2.clearDesireForParenthood();
 
-        newHareList.add(new Hare(hare1.getX(), hare1.getY()));
+        HaresService haresService = context.getBean("haresService", HaresService.class);
+        haresService.getNewHareList().add(new Hare(hare1.getX(), hare1.getY()));
 
         textArea.append("\n Rozmnożenie zająców");
     }
@@ -29,8 +28,10 @@ public class Utils {
         fox1.clearDesireForParenthood();
         fox2.clearDesireForParenthood();
 
-        newFoxList.add(new Fox(fox1.getX(), fox1.getY()));
+        FoxesService foxesService = context.getBean("foxesService", FoxesService.class);
+        foxesService.getNewFoxList().add(new Fox(fox1.getX(), fox1.getY()));
 
         textArea.append("\n Rozmnożenie lisów");
     }
+
 }

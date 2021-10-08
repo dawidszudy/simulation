@@ -7,14 +7,11 @@ import java.awt.geom.Ellipse2D;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static pl.pp.simulation.model.GrassUtils.grassList;
-import static pl.pp.simulation.model.Hares.deathHareList;
 import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
 import static pl.pp.simulation.utils.Utils.getDistance;
 import static pl.pp.simulation.utils.Utils.multipleHares;
 
 public class Hare extends Animal {
-
 
     public Hare() {
         super();
@@ -35,7 +32,7 @@ public class Hare extends Animal {
         super.move();
 
         if ( hunger > deathlyHunger ) {
-            deathHareList.add(this);
+            haresService.getDeathHareList().add(this);
         }
     }
 
@@ -81,7 +78,7 @@ public class Hare extends Animal {
     }
 
     private void eatGrass(Grass nearestGrass) {
-        grassList.remove(nearestGrass);
+        grassService.getGrassList().remove(nearestGrass);
         textArea.append("\n Jedzenie trawy");
         hunger -= reducingHungerByGrass;
     }
@@ -94,4 +91,5 @@ public class Hare extends Animal {
     public double getY() {
         return y;
     }
+
 }
