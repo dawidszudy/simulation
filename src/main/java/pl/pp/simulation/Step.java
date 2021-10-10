@@ -4,7 +4,6 @@ import pl.pp.simulation.model.FoxesService;
 import pl.pp.simulation.model.GrassService;
 import pl.pp.simulation.model.HaresService;
 import pl.pp.simulation.ui.SimulationComponent;
-import pl.pp.simulation.ui.panel.ControlPanel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
@@ -19,6 +18,8 @@ public class Step {
     private FoxesService foxesService;
     private SimulationComponent simulationComponent;
 
+    private JLabel timeLabel;
+
     public Step() {
         System.out.println("konstruktor - Step");
     }
@@ -27,7 +28,7 @@ public class Step {
     private void init() {
         timer = new Timer(40, e -> {
             steps++;
-            ControlPanel.timeLabel.setText("Czas: " + steps);
+            timeLabel.setText("Czas: " + steps);
 
             grassService.grow();
             haresService.move();
@@ -69,4 +70,7 @@ public class Step {
         this.simulationComponent = simulationComponent;
     }
 
+    public void setTimeLabel(JLabel timeLabel) {
+        this.timeLabel = timeLabel;
+    }
 }

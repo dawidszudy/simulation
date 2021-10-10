@@ -2,7 +2,6 @@ package pl.pp.simulation.ui.buttons;
 
 import pl.pp.simulation.Step;
 import pl.pp.simulation.model.*;
-import pl.pp.simulation.ui.panel.ControlPanel;
 import pl.pp.simulation.utils.ParameterModel;
 
 import javax.annotation.PostConstruct;
@@ -13,9 +12,9 @@ import static pl.pp.simulation.utils.ProgramData.started;
 
 public class StartButton extends JButton {
 
-    public ParameterModel grassParameter = ControlPanel.grassParameter;
-    public ParameterModel hareParameter = ControlPanel.hareParameter;
-    public ParameterModel foxParameter = ControlPanel.foxParameter;
+    private ParameterModel grassParameter;
+    private ParameterModel hareParameter;
+    private ParameterModel foxParameter;
 
     private StopButton stopButton;
     private Step timer;
@@ -40,12 +39,19 @@ public class StartButton extends JButton {
             started = true;
             stopButton.setEnabled(true);
             setEnabled(false);
-            ControlPanel.setNotEditableParameters();
+            setNotEditableParameters();
             timer.start();
         });
     }
 
-    public void createObjects() {
+    //przeniesione z ControlPanel
+    private void setNotEditableParameters() {
+        grassParameter.setEditable(false);
+        hareParameter.setEditable(false);
+        foxParameter.setEditable(false);
+    }
+
+    private void createObjects() {
         for (int i = 0; i < hareParameter.getValue(); i++) {
             haresService.getHareList().add(new Hare());
         }
@@ -80,4 +86,15 @@ public class StartButton extends JButton {
         this.foxesService = foxesService;
     }
 
+    public void setGrassParameter(ParameterModel grassParameter) {
+        this.grassParameter = grassParameter;
+    }
+
+    public void setHareParameter(ParameterModel hareParameter) {
+        this.hareParameter = hareParameter;
+    }
+
+    public void setFoxParameter(ParameterModel foxParameter) {
+        this.foxParameter = foxParameter;
+    }
 }
