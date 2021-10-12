@@ -1,7 +1,10 @@
 package pl.pp.simulation.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import pl.pp.simulation.Step;
 import pl.pp.simulation.model.FoxesService;
 import pl.pp.simulation.model.GrassService;
@@ -18,13 +21,18 @@ import pl.pp.simulation.ui.panel.ScrollPanel;
 import pl.pp.simulation.utils.ParameterModel;
 
 import javax.swing.*;
+import java.util.Objects;
 
 @Configuration
+@PropertySource("simulation.properties")
 public class SimulationConfig {
+
+    @Autowired
+    private Environment environment;
 
     @Bean
     public StartButton startButton() {
-        StartButton startButton = new StartButton("Start");
+        StartButton startButton = new StartButton(environment.getProperty("button.start.text"));
         startButton.setStopButton(stopButton());
         startButton.setTimer(timer());
 
@@ -40,21 +48,26 @@ public class SimulationConfig {
 
     @Bean
     public ChartButton chartButton() {
-        ChartButton chartButton = new ChartButton("Wykres");
+        ChartButton chartButton = new ChartButton(environment.getProperty("button.chart.text"));
         chartButton.setSimulationChart(simulationChart());
         return chartButton;
     }
 
     @Bean
     public StopButton stopButton() {
-        StopButton stopButton = new StopButton("Stop");
+        StopButton stopButton = new StopButton(environment.getProperty("button.stop.text"));
         stopButton.setTimer(timer());
         return stopButton;
     }
 
     @Bean
+    public JLabel timeLabel() {
+        return new JLabel(environment.getProperty("time.label"));
+    }
+
+    @Bean
     public ResetButton resetButton() {
-        ResetButton resetButton = new ResetButton("Reset");
+        ResetButton resetButton = new ResetButton(environment.getProperty("button.reset.text"));
         resetButton.setStartButton(startButton());
         resetButton.setStopButton(stopButton());
         resetButton.setTimer(timer());
@@ -97,17 +110,23 @@ public class SimulationConfig {
 
     @Bean
     public ParameterModel grassParameter() {
-        return new ParameterModel("Trawa", 100);
+        String label = environment.getProperty("parameter.grass.label");
+        int defaultValue = Integer.parseInt(Objects.requireNonNull(environment.getProperty("parameter.grass.value")));
+        return new ParameterModel(label, defaultValue);
     }
 
     @Bean
     public ParameterModel hareParameter() {
-        return new ParameterModel("Zające", 20);
+        String label = environment.getProperty("parameter.hare.label");
+        int defaultValue = Integer.parseInt(Objects.requireNonNull(environment.getProperty("parameter.hare.value")));
+        return new ParameterModel(label, defaultValue);
     }
 
     @Bean
     public ParameterModel foxParameter() {
-        return new ParameterModel("Lisy", 10);
+        String label = environment.getProperty("parameter.fox.label");
+        int defaultValue = Integer.parseInt(Objects.requireNonNull(environment.getProperty("parameter.fox.value")));
+        return new ParameterModel(label, defaultValue);
     }
 
     @Bean
@@ -122,8 +141,13 @@ public class SimulationConfig {
     }
 
     @Bean
-    public JLabel timeLabel() {
-        return new JLabel("Czas: 0");
+    public Integer frameWidth() {
+        return Integer.valueOf(Objects.requireNonNull(environment.getProperty("frame.frameWidth")));
+    }
+
+    @Bean
+    public Integer frameHeight() {
+        return Integer.valueOf(Objects.requireNonNull(environment.getProperty("frame.frameHeight")));
     }
 
     @Bean
@@ -139,12 +163,17 @@ public class SimulationConfig {
         controlPanel.setHareParameter(hareParameter());
 
         controlPanel.setSimulationChart(simulationChart());
+        controlPanel.setFrameWidth(frameWidth());
+        controlPanel.setFrameHeight(frameHeight());
         return controlPanel;
     }
 
     @Bean
     public ScrollPanel scrollPanel() {
-        return new ScrollPanel();
+        ScrollPanel scrollPanel = new ScrollPanel();
+        scrollPanel.setFrameWidth(frameWidth());
+        scrollPanel.setFrameHeight(frameHeight());
+        return scrollPanel;
     }
 
     @Bean
@@ -157,8 +186,45 @@ public class SimulationConfig {
     }
 
     @Bean
+    public String titleChart() {
+        return environment.getProperty("chart.titleChart");
+    }
+
+    @Bean
+    public String xTitle() {
+        return environment.getProperty("chart.xTitle");
+    }
+
+    @Bean
+    public String yTitle() {
+        return environment.getProperty("chart.yTitle");
+    }
+
+    @Bean
+    public String titleHareSeries() {
+        return environment.getProperty("chart.titleHareSeries");
+    }
+
+    @Bean
+    public String titleGrassSeries() {
+        return environment.getProperty("chart.titleGrassSeries");
+    }
+
+    @Bean
+    public String titleFoxSeries() {
+        return environment.getProperty("chart.titleFoxSeries");
+    }
+
+    @Bean
     public SimulationChart simulationChart() {
-        return new SimulationChart();
+        SimulationChart simulationChart = new SimulationChart();
+        simulationChart.setTitleChart(titleChart());
+        simulationChart.setxTitle(xTitle());
+        simulationChart.setyTitle(yTitle());
+        simulationChart.setTitleFoxSeries(titleFoxSeries());
+        simulationChart.setTitleGrassSeries(titleGrassSeries());
+        simulationChart.setTitleHareSeries(titleHareSeries());
+        return simulationChart;
     }
 
     @Bean
@@ -167,6 +233,8 @@ public class SimulationConfig {
         myFrame.setSimulationComponent(simulationComponent());
         myFrame.setControlPanel(controlPanel());
         myFrame.setScrollPanel(scrollPanel());
+        myFrame.setFrameWidth(frameWidth());
+        myFrame.setFrameHeight(frameHeight());
         return myFrame;
     }
 

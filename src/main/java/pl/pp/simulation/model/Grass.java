@@ -7,6 +7,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
 public class Grass extends Organism {
+
     public static int size = 8;
 
     public Grass() {
@@ -14,7 +15,6 @@ public class Grass extends Organism {
         x = random.nextInt(ProgramData.maxWidth - size);
         y = random.nextInt(ProgramData.maxHeight - size);
     }
-
 
     public void draw(Graphics2D graphics2D) {
         Ellipse2D.Double hareEllipse = new Ellipse2D.Double(x, y, size, size);

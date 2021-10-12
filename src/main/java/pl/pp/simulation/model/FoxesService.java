@@ -20,23 +20,23 @@ public class FoxesService {
 
 
     public void move() {
-        getNewFoxList().clear();
-        getDeathFoxList().clear();
-        for (Fox fox : getFoxList()) {
+        newFoxList.clear();
+        deathFoxList.clear();
+        for (Fox fox : foxList) {
             fox.move();
         }
-        getFoxList().addAll(getNewFoxList());
-        getFoxList().removeAll(getDeathFoxList());
+        foxList.addAll(newFoxList);
+        foxList.removeAll(deathFoxList);
     }
 
     public void updateAmount() {
-        int foxAmount = getFoxList().size();
+        int foxAmount = foxList.size();
         foxParameter.setValue(foxAmount);
         simulationChart.getFoxSeries().add(steps, foxAmount);
     }
 
     public void draw(Graphics2D graphics2D) {
-        for (Fox grass : getFoxList()) {
+        for (Fox grass : foxList) {
             grass.draw(graphics2D);
         }
     }

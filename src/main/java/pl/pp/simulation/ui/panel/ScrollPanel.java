@@ -8,19 +8,23 @@ import java.awt.*;
 public class ScrollPanel extends JScrollPane {
 
     public static JTextArea textArea;
+    private int frameWidth;
+    private int frameHeight;
 
-    //usunięcie przekazanie instancji bo niepotrzebne już
-//    private static ScrollPanel scrollPanel = new ScrollPanel();
-//
-//    public static ScrollPanel getInstance() {
-//        return scrollPanel;
-//    }
 
     public ScrollPanel() {
         System.out.println("konstruktor - ScrollPanel");
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setPreferredSize(new Dimension(ProgramData.frameWidth, ProgramData.frameHeight - ProgramData.maxHeight - 50));
+        scrollPane.setPreferredSize(new Dimension(frameWidth, frameHeight - ProgramData.maxHeight - 50));
+    }
+
+    public void setFrameWidth(int frameWidth) {
+        this.frameWidth = frameWidth;
+    }
+
+    public void setFrameHeight(int frameHeight) {
+        this.frameHeight = frameHeight;
     }
 }

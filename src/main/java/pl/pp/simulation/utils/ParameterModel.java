@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ParameterModel {
+
     private String stringLabel;
     private int defaultValue;
     private JPanel panel;
     private JTextField textField;
     private JLabel label;
+
 
     public ParameterModel(String stringLabel, int defaultValue) {
         this.stringLabel = stringLabel;

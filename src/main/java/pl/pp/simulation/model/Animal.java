@@ -11,6 +11,7 @@ import static pl.pp.simulation.utils.ProgramData.context;
 import static pl.pp.simulation.utils.Utils.getDistance;
 
 public abstract class Animal extends Organism {
+
     public static int size = 10;
     public static int minimumDesireForParenthood = 50;
     public static int minimumHunger = 50;

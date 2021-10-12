@@ -36,7 +36,6 @@ public class ResetButton extends JButton {
         System.out.println("konstruktor - Reset Button ");
     }
 
-    //metoda inicjalizowana po konstruktorze obiektu
     @PostConstruct
     private void init() {
         addActionListener(e -> {
@@ -61,7 +60,6 @@ public class ResetButton extends JButton {
         });
     }
 
-    //przeniesione z ControlPanel
     private void setEditableParameters() {
         grassParameter.setEditable(true);
         hareParameter.setEditable(true);
@@ -74,7 +72,6 @@ public class ResetButton extends JButton {
         foxesService.getFoxList().clear();
     }
 
-    //settery do ustawiania na obiekcie w SimulationConfig - @Bean
     public void setStopButton(StopButton stopButton) {
         this.stopButton = stopButton;
     }

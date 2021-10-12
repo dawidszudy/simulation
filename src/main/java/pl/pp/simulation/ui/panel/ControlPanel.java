@@ -27,6 +27,10 @@ public class ControlPanel extends JPanel {
 
     private SimulationChart simulationChart;
 
+    private int frameWidth;
+    private int frameHeight;
+
+
     public ControlPanel() {
         System.out.println("konstruktor - ControlPanel");
     }
@@ -35,7 +39,7 @@ public class ControlPanel extends JPanel {
     private void init() {
         setLayout(new GridLayout(8, 1, 50, 50));
 
-        setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));
+        setPreferredSize(new Dimension(frameWidth - ProgramData.maxWidth - 50, frameHeight));
 
         add(timeLabel);
         add(grassParameter.getPanel());
@@ -44,7 +48,6 @@ public class ControlPanel extends JPanel {
         add(startButton);
         add(stopButton);
         add(resetButton);
-        //add(ChartButton.getInstance());
         add(chartButton);
     }
 
@@ -82,5 +85,13 @@ public class ControlPanel extends JPanel {
 
     public void setFoxParameter(ParameterModel foxParameter) {
         this.foxParameter = foxParameter;
+    }
+
+    public void setFrameWidth(int frameWidth) {
+        this.frameWidth = frameWidth;
+    }
+
+    public void setFrameHeight(int frameHeight) {
+        this.frameHeight = frameHeight;
     }
 }

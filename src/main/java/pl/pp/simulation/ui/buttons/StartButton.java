@@ -44,7 +44,6 @@ public class StartButton extends JButton {
         });
     }
 
-    //przeniesione z ControlPanel
     private void setNotEditableParameters() {
         grassParameter.setEditable(false);
         hareParameter.setEditable(false);
@@ -65,7 +64,6 @@ public class StartButton extends JButton {
         }
     }
 
-    //settery do ustawiania na obiekcie w SimulationConfig - @Bean
     public void setStopButton(StopButton stopButton) {
         this.stopButton = stopButton;
     }

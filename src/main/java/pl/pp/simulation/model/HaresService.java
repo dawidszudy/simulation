@@ -20,24 +20,24 @@ public class HaresService {
 
 
     public void move() {
-        getNewHareList().clear();
-        getDeathHareList().clear();
-        for (Hare hare : getHareList()) {
+        newHareList.clear();
+        deathHareList.clear();
+        for (Hare hare : hareList) {
             hare.move();
         }
 
-        getHareList().addAll(getNewHareList());
-        getHareList().removeAll(getDeathHareList());
+        hareList.addAll(newHareList);
+        hareList.removeAll(deathHareList);
     }
 
     public void updateAmount() {
-        int hareAmount = getHareList().size();
+        int hareAmount = hareList.size();
         hareParameter.setValue(hareAmount);
         simulationChart.getHareSeries().add(steps, hareAmount);
     }
 
     public void draw(Graphics2D graphics2D) {
-        for (Hare hare : getHareList()) {
+        for (Hare hare : hareList) {
             hare.draw(graphics2D);
         }
     }

@@ -20,6 +20,7 @@ public class Step {
 
     private JLabel timeLabel;
 
+
     public Step() {
         System.out.println("konstruktor - Step");
     }

@@ -9,10 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SimulationComponent extends JComponent {
-    
+
     private GrassService grassService;
     private HaresService haresService;
     private FoxesService foxesService;
+
 
     public SimulationComponent() {
         System.out.println("konstruktor - SimulationComponent");
@@ -23,13 +24,11 @@ public class SimulationComponent extends JComponent {
         Toolkit.getDefaultToolkit().sync();
         Graphics2D graphics2D = (Graphics2D) g;
 
-
         Rectangle limit = new Rectangle(0, 0, ProgramData.maxWidth, ProgramData.maxHeight);
         graphics2D.setPaint(Color.LIGHT_GRAY);
         graphics2D.fill(limit);
 
         draw(graphics2D);
-
     }
 
     public void draw(Graphics2D graphics2D) {

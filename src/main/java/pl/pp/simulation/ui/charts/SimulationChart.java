@@ -6,6 +6,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 public class SimulationChart extends JFrame {
@@ -14,8 +15,20 @@ public class SimulationChart extends JFrame {
     private XYSeries grassSeries;
     private XYSeries foxSeries;
 
+    private String titleChart;
+    private String xTitle;
+    private String yTitle;
+    private String titleHareSeries;
+    private String titleGrassSeries;
+    private String titleFoxSeries;
+
+
     public SimulationChart() {
         System.out.println("konstruktor - SimulationChart");
+    }
+
+    @PostConstruct
+    private void init() {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setTitle("Wykres");
 
@@ -29,19 +42,20 @@ public class SimulationChart extends JFrame {
     }
 
     private JFreeChart getChart(XYSeriesCollection dataset) {
+
         return ChartFactory.createXYLineChart(
-                "Ilość organizmów w zależeności od czasu",
-                "czas",
-                "ilosć",
+                titleChart,
+                xTitle,
+                yTitle,
                 dataset
         );
     }
 
     private XYSeriesCollection getDataSet() {
         XYSeriesCollection dataset = new XYSeriesCollection();
-        hareSeries = new XYSeries("zające");
-        grassSeries = new XYSeries("trawa");
-        foxSeries = new XYSeries("lisy");
+        hareSeries = new XYSeries(titleHareSeries);
+        grassSeries = new XYSeries(titleGrassSeries);
+        foxSeries = new XYSeries(titleFoxSeries);
 
         dataset.addSeries(hareSeries);
         dataset.addSeries(grassSeries);
@@ -67,4 +81,27 @@ public class SimulationChart extends JFrame {
         foxSeries.clear();
     }
 
+    public void setTitleChart(String titleChart) {
+        this.titleChart = titleChart;
+    }
+
+    public void setxTitle(String xTitle) {
+        this.xTitle = xTitle;
+    }
+
+    public void setyTitle(String yTitle) {
+        this.yTitle = yTitle;
+    }
+
+    public void setTitleHareSeries(String titleHareSeries) {
+        this.titleHareSeries = titleHareSeries;
+    }
+
+    public void setTitleGrassSeries(String titleGrassSeries) {
+        this.titleGrassSeries = titleGrassSeries;
+    }
+
+    public void setTitleFoxSeries(String titleFoxSeries) {
+        this.titleFoxSeries = titleFoxSeries;
+    }
 }

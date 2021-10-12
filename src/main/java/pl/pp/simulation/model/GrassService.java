@@ -22,20 +22,20 @@ public class GrassService {
     }
 
     public void updateAmount() {
-        int grassAmount = getGrassList().size();
+        int grassAmount = grassList.size();
         grassParameter.setValue(grassAmount);
         simulationChart.getGrassSeries().add(steps, grassAmount);
     }
 
     public void draw(Graphics2D graphics2D) {
-        for (Grass grass : getGrassList()) {
+        for (Grass grass : grassList) {
             grass.draw(graphics2D);
         }
     }
 
     public void grow() {
         if ( steps % frequency == 0 ) {
-            getGrassList().add(new Grass());
+            grassList.add(new Grass());
         }
     }
 
