@@ -1,8 +1,8 @@
 package pl.pp.simulation.utils;
 
 import pl.pp.simulation.model.*;
+import pl.pp.simulation.ui.panel.ScrollPanel;
 
-import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
 import static pl.pp.simulation.utils.ProgramData.context;
 
 public class Utils {
@@ -20,8 +20,8 @@ public class Utils {
 
         HaresService haresService = context.getBean("haresService", HaresService.class);
         haresService.getNewHareList().add(new Hare(hare1.getX(), hare1.getY()));
-
-        textArea.append("\n Rozmnożenie zająców");
+        ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
+        scrollPanel.addText("\n Rozmnożenie zająców");
     }
 
     public static void multipleFoxes(Fox fox1, Fox fox2) {
@@ -30,8 +30,8 @@ public class Utils {
 
         FoxesService foxesService = context.getBean("foxesService", FoxesService.class);
         foxesService.getNewFoxList().add(new Fox(fox1.getX(), fox1.getY()));
-
-        textArea.append("\n Rozmnożenie lisów");
+        ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
+        scrollPanel.addText("\n Rozmnożenie lisów");
     }
 
 }

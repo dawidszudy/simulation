@@ -1,5 +1,6 @@
 package pl.pp.simulation.model;
 
+import pl.pp.simulation.ui.panel.ScrollPanel;
 import pl.pp.simulation.utils.Utils;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
+import static pl.pp.simulation.utils.ProgramData.context;
 import static pl.pp.simulation.utils.Utils.getDistance;
 import static pl.pp.simulation.utils.Utils.multipleHares;
 
@@ -79,7 +80,8 @@ public class Hare extends Animal {
 
     private void eatGrass(Grass nearestGrass) {
         grassService.getGrassList().remove(nearestGrass);
-        textArea.append("\n Jedzenie trawy");
+        ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
+        scrollPanel.addText("\n Jedzenie trawy");
         hunger -= reducingHungerByGrass;
     }
 

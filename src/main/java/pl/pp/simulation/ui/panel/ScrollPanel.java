@@ -2,22 +2,35 @@ package pl.pp.simulation.ui.panel;
 
 import pl.pp.simulation.utils.ProgramData;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 
-public class ScrollPanel extends JScrollPane {
+public class ScrollPanel {
 
-    public static JTextArea textArea;
+    public JTextArea textArea = new JTextArea();
     private int frameWidth;
     private int frameHeight;
-
+    //kompozycja zamiast dziedziczenia
+    private final JScrollPane scrollPane;
 
     public ScrollPanel() {
+        scrollPane = new JScrollPane(textArea);
         System.out.println("konstruktor - ScrollPanel");
-        textArea = new JTextArea();
+    }
+
+    @PostConstruct
+    public void init() {
         textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(frameWidth, frameHeight - ProgramData.maxHeight - 50));
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void addText(String text) {
+        textArea.append(text);
     }
 
     public void setFrameWidth(int frameWidth) {
@@ -26,5 +39,9 @@ public class ScrollPanel extends JScrollPane {
 
     public void setFrameHeight(int frameHeight) {
         this.frameHeight = frameHeight;
+    }
+
+    public JTextArea getTextArea() {
+        return textArea;
     }
 }

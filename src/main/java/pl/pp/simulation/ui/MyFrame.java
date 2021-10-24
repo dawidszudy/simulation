@@ -12,7 +12,6 @@ public class MyFrame extends JFrame {
     private ControlPanel controlPanel;
     private ScrollPanel scrollPanel;
     private SimulationComponent simulationComponent;
-
     private int frameWidth;
     private int frameHeight;
 
@@ -29,7 +28,7 @@ public class MyFrame extends JFrame {
 
         add(simulationComponent);
         add(controlPanel, BorderLayout.EAST);
-        add(scrollPanel, BorderLayout.SOUTH);
+        add(scrollPanel.getScrollPane(), BorderLayout.SOUTH);
     }
 
     public void setControlPanel(ControlPanel controlPanel) {

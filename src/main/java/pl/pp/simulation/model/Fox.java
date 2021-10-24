@@ -1,5 +1,6 @@
 package pl.pp.simulation.model;
 
+import pl.pp.simulation.ui.panel.ScrollPanel;
 import pl.pp.simulation.utils.Utils;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
+import static pl.pp.simulation.utils.ProgramData.context;
 import static pl.pp.simulation.utils.Utils.getDistance;
 import static pl.pp.simulation.utils.Utils.multipleFoxes;
 
@@ -77,7 +78,8 @@ public class Fox extends Animal {
 
     private void eatHare(Hare hare) {
         haresService.getHareList().remove(hare);
-        textArea.append("\n Jedzenie zająca");
+        ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
+        scrollPanel.addText("\n Jedzenie zająca");
         hunger -= reducingHungerByHare;
     }
 

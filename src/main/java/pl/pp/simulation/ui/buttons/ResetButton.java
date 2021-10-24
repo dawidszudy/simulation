@@ -5,12 +5,12 @@ import pl.pp.simulation.model.FoxesService;
 import pl.pp.simulation.model.GrassService;
 import pl.pp.simulation.model.HaresService;
 import pl.pp.simulation.ui.charts.SimulationChart;
+import pl.pp.simulation.ui.panel.ScrollPanel;
 import pl.pp.simulation.utils.ParameterModel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 
-import static pl.pp.simulation.ui.panel.ScrollPanel.textArea;
 import static pl.pp.simulation.utils.ProgramData.*;
 
 public class ResetButton extends JButton {
@@ -42,7 +42,8 @@ public class ResetButton extends JButton {
             running = false;
             started = false;
 
-            textArea.setText("");
+            ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
+            scrollPanel.getTextArea().setText("");
             simulationChart.clearSeries();
 
             timer.stop();
