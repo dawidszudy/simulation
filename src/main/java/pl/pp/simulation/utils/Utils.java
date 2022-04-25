@@ -21,7 +21,7 @@ public class Utils {
         HaresService haresService = context.getBean("haresService", HaresService.class);
         haresService.getNewHareList().add(new Hare(hare1.getX(), hare1.getY()));
         ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
-        scrollPanel.addText("\n Rozmnożenie zająców");
+        scrollPanel.addText("\n Multiplication of hares");
     }
 
     public static void multipleFoxes(Fox fox1, Fox fox2) {
@@ -31,7 +31,7 @@ public class Utils {
         FoxesService foxesService = context.getBean("foxesService", FoxesService.class);
         foxesService.getNewFoxList().add(new Fox(fox1.getX(), fox1.getY()));
         ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
-        scrollPanel.addText("\n Rozmnożenie lisów");
+        scrollPanel.addText("\n Multiplication of foxes");
     }
 
 }

@@ -11,7 +11,7 @@ public class ScrollPanel {
     public JTextArea textArea = new JTextArea();
     private int frameWidth;
     private int frameHeight;
-    //kompozycja zamiast dziedziczenia
+    //composition instead of inheritance
     private final JScrollPane scrollPane;
 
     public ScrollPanel() {

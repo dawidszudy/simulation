@@ -29,7 +29,7 @@ public class Step {
     private void init() {
         timer = new Timer(40, e -> {
             steps++;
-            timeLabel.setText("Czas: " + steps);
+            timeLabel.setText("Time: " + steps);
 
             grassService.grow();
             haresService.move();

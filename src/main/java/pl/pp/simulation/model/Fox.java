@@ -79,7 +79,7 @@ public class Fox extends Animal {
     private void eatHare(Hare hare) {
         haresService.getHareList().remove(hare);
         ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
-        scrollPanel.addText("\n Jedzenie zająca");
+        scrollPanel.addText("\n Eating hare");
         hunger -= reducingHungerByHare;
     }
 

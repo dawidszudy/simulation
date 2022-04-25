@@ -21,7 +21,7 @@ public class MyFrame extends JFrame {
 
     @PostConstruct
     private void init() {
-        setTitle("Sumulacja drapieżnik - ofiara");
+        setTitle("Predator-prey simulation");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(frameWidth, frameHeight);
         setResizable(false);

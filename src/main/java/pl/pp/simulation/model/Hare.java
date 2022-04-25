@@ -81,7 +81,7 @@ public class Hare extends Animal {
     private void eatGrass(Grass nearestGrass) {
         grassService.getGrassList().remove(nearestGrass);
         ScrollPanel scrollPanel = context.getBean("scrollPanel", ScrollPanel.class);
-        scrollPanel.addText("\n Jedzenie trawy");
+        scrollPanel.addText("\n Eating grass");
         hunger -= reducingHungerByGrass;
     }
 

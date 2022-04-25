@@ -30,7 +30,7 @@ public class SimulationChart extends JFrame {
     @PostConstruct
     private void init() {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setTitle("Wykres");
+        setTitle("Chart");
 
         XYSeriesCollection dataset = getDataSet();
         JFreeChart freeChart = getChart(dataset);
